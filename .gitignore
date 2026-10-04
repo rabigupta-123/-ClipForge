@@ -1,0 +1,11 @@
+# Runtime artifacts
+jobs/
+tmp/
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Local test outputs
+tmp/*
+!tmp/.gitkeep

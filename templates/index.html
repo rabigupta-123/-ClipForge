@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClipForge — Free AI Clipping & Text-to-Video Studio</title>
+  <meta name="description" content="Paste a YouTube link to auto-clip the best moment, or turn text into HD videos. 100% free, no API keys." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- animated background -->
+  <div class="bg-aurora" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="brand">
+      <span class="logo">🎬</span>
+      <span class="brand-name">Clip<span>Forge</span></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#tool">Studio</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <a class="btn ghost" href="https://github.com" target="_blank" rel="noopener">★ Star on GitHub</a>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="hero-orb orb-a" aria-hidden="true"></div>
+      <div class="hero-orb orb-b" aria-hidden="true"></div>
+
+      <span class="pill"><span class="dot"></span> 100% free · no API keys · no credit card</span>
+      <h1 class="hero-title">Turn any link into<br/><span class="grad">scroll-stopping clips</span></h1>
+      <p class="hero-sub">
+        Paste a YouTube video to auto-cut its <b>best 60 seconds</b>, or type a script and
+        generate a <b>1080p HD video</b> with AI visuals, voice &amp; captions. All in your browser.
+      </p>
+      <div class="hero-cta">
+        <a class="btn primary" id="hero-clip" href="#tool">🎞️ Start Clipping</a>
+        <a class="btn outline" id="hero-ttv" href="#tool">✨ Generate Video</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>60s</b><span>max clip length</span></div>
+        <div><b>1080p</b><span>HD output</span></div>
+        <div><b>$0</b><span>forever free</span></div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+      <article class="feat">
+        <div class="feat-ic">🎯</div>
+        <h3>Auto best-moment</h3>
+        <p>Reads YouTube's "most replayed" heatmap (with a local audio-energy fallback) to find the moment worth keeping.</p>
+      </article>
+      <article class="feat">
+        <div class="feat-ic">✨</div>
+        <h3>Text → HD video</h3>
+        <p>Two modes — AI image story or animated text cards — with free AI voice and burned-in captions.</p>
+      </article>
+      <article class="feat">
+        <div class="feat-ic">🔤</div>
+        <h3>Caption studio</h3>
+        <p>Auto, custom or none. Tune size, color and position. Perfect for Reels, Shorts &amp; TikTok.</p>
+      </article>
+    </section>
+
+    <!-- STUDIO / TOOL -->
+    <section class="tool" id="tool">
+      <div class="tool-head">
+        <h2>The Studio</h2>
+        <p>Pick a mode and let ClipForge do the editing.</p>
+      </div>
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="clip">🎞️ YouTube Clipper</button>
+        <button class="tab" data-tab="ttv">✨ Text to Video</button>
+      </nav>
+
+      <!-- CLIP PANEL -->
+      <section class="panel active" id="panel-clip">
+        <div class="card">
+          <label class="field">
+            <span>YouTube link</span>
+            <div class="input-wrap">
+              <span class="ipre">🔗</span>
+              <input id="clip-url" type="url" placeholder="https://youtube.com/watch?v=..." />
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Clip length: <b id="clip-dur-val">60</b>s <em>(max 60s)</em></span>
+            <input id="clip-dur" type="range" min="15" max="60" step="5" value="60" />
+          </label>
+
+          <div id="clip-caption"></div>
+
+          <button class="btn primary block" id="clip-go">⚡ Generate best-moment clip</button>
+        </div>
+      </section>
+
+      <!-- TTV PANEL -->
+      <section class="panel" id="panel-ttv">
+        <div class="card">
+          <label class="field">
+            <span>Script / story</span>
+            <textarea id="ttv-script" rows="5" placeholder="Type what you want the video to say. Each sentence becomes a scene...">The ocean is waking up. Sunlight spills across the waves. A quiet moment before the world arrives. Breathe. Begin.</textarea>
+          </label>
+
+          <div class="segmented" id="ttv-mode">
+            <button class="seg active" data-mode="image_story">🖼️ AI Image Story</button>
+            <button class="seg" data-mode="text_cards">🔤 Text Cards</button>
+          </div>
+
+          <label class="field">
+            <span>Video length: <b id="ttv-dur-val">60</b>s <em>(max 60s)</em></span>
+            <input id="ttv-dur" type="range" min="15" max="60" step="5" value="60" />
+          </label>
+
+          <div class="row">
+            <label class="field grow">
+              <span>Voice</span>
+              <select id="ttv-voice">
+                <option value="alloy">Alloy</option>
+                <option value="echo">Echo</option>
+                <option value="fable">Fable</option>
+                <option value="onyx">Onyx</option>
+                <option value="nova">Nova</option>
+                <option value="shimmer">Shimmer</option>
+              </select>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="ttv-music" checked /> <span>Background music</span>
+            </label>
+          </div>
+
+          <div id="ttv-caption"></div>
+
+          <button class="btn primary block" id="ttv-go">⚡ Generate HD video</button>
+        </div>
+      </section>
+
+      <!-- RESULT -->
+      <section class="card result" id="result" hidden>
+        <div id="progress-wrap">
+          <div class="stage" id="stage-msg">Working...</div>
+          <div class="bar"><div class="fill" id="bar-fill"></div></div>
+          <div class="pct" id="bar-pct">0%</div>
+        </div>
+        <div id="done-wrap" hidden>
+          <video id="player" controls playsinline></video>
+          <a class="btn outline block" id="download" download>⬇️ Download clip</a>
+        </div>
+        <div class="err" id="err" hidden></div>
+      </section>
+    </section>
+
+    <!-- HOW -->
+    <section class="how" id="how">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step"><span class="num">1</span><h4>Paste &amp; pick</h4><p>A link or a script, plus your length &amp; caption style.</p></div>
+        <div class="step"><span class="num">2</span><h4>We process</h4><p>ffmpeg + AI find the best moment or build your scenes.</p></div>
+        <div class="step"><span class="num">3</span><h4>Download</h4><p>A polished 1080p clip, ready to post anywhere.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="brand small">🎬 ClipForge</div>
+    <p>Built with yt-dlp · ffmpeg · free Pollinations AI. No API keys, no cost.</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

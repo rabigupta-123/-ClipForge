@@ -1,0 +1,9 @@
+# ClipForge runtime dependencies.
+# The web server itself uses only the Python standard library (no Flask needed).
+# yt-dlp is required for the YouTube download step.
+yt-dlp
+
+# Optional: enable automatic ("whisper") captions on clipped videos.
+# NOTE: this is heavy (~150 MB model download) and slow on free tiers.
+# Leave it commented unless you want local speech-to-text captions.
+# faster-whisper

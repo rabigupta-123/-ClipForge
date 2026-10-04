@@ -1,0 +1,16 @@
+# Render (free tier) deployment config.
+# Deploy: push this repo to GitHub, then "New +" -> "Web Service" -> connect repo.
+# Render auto-detects this file.
+services:
+  - type: web
+    name: clipforge
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: "8000"
+      # Optional: only needed if you uncomment faster-whisper in requirements.txt
+      # - key: HF_HUB_DISABLE_TELEMETRY
+      #   value: "1"
